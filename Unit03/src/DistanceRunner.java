@@ -14,23 +14,23 @@ public class DistanceRunner
 {
 	public static void main( String[] args )
 	{
-		//add test cases
-		//test case 1
+		Scanner keyboard = new Scanner(System.in);
 		Distance Runner = new Distance();
-		Runner.setCoordinates(1, 1, 2, 1);
-		Runner.calcDistance();
-		Runner.getDistance();
-		Runner.print();
-		//test case 2
-		Runner.setCoordinates(1, 1, -2, 2);
-		Runner.calcDistance();
-		Runner.getDistance();
-		Runner.print();
-		//test case 3
-		Runner.setCoordinates(1, 1, 0, 0);
-		Runner.calcDistance();
-		Runner.getDistance();
-		Runner.print();
 		
+		out.print("Enter X1 :: ");
+		int xOne = keyboard.nextInt();
+		out.print("Enter Y1 :: ");
+		int yOne = keyboard.nextInt();
+		out.print("Enter X2:: ");
+		int xTwo = keyboard.nextInt();
+		out.print("Enter Y2 :: ");
+		int yTwo = keyboard.nextInt();
+//		
+//		//add test cases
+		
+		Runner.setCoordinates(xOne,yOne,xTwo,yTwo);
+		Runner.calcDistance();
+		Runner.getDistance();
+		System.out.println(Runner);
 	}
 }
