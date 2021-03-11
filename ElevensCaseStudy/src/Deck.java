@@ -12,8 +12,8 @@ public class Deck {
 	/**
 	 * cards contains all the cards in the deck.
 	 */
-//	private List<Card> cards;
-	private Card[] cards;
+	private List<Card> cards;
+//	private Card[] cards;
 	/**
 	 * size is the number of not-yet-dealt cards.
 	 * Cards are dealt from the top (highest index) down.
@@ -30,19 +30,32 @@ public class Deck {
 	 * @param suits is an array containing all of the card suits.
 	 * @param values is an array containing all of the card point values.
 	 */
-	public Deck(String[] ranks, String[] suits, int[] values) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
-		cards = new Card[ranks.length * suits.length];
-			for(int i = 0; i < ranks.length; i++)
+//	public Deck(String[] ranks, String[] suits, int[] values) {
+//		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
+//		cards = new Card[ranks.length * suits.length];
+//			for(int i = 0; i < ranks.length; i++)
+//			{
+//				for(int j = 0; j < suits.length; j++)
+//				{
+//					int cardIndex =  (suits.length) * i + j;
+//					cards[cardIndex] = new Card(ranks[i], suits[j], values[i]);
+//				}
+//			}
+//
+//		size = cards.length;
+//		shuffle();
+//	}
+	public Deck(String[] ranks, String[] suits, int[] values)
+	{
+		cards = new ArrayList<Card>();
+		for (int j = 0; j < ranks.length; j++)
+		{
+			for(int i = 0; i < suits.length; i++)
 			{
-				for(int j = 0; j < suits.length; j++)
-				{
-					int cardIndex =  (suits.length) * i + j;
-					cards[cardIndex] = new Card(ranks[i], suits[j], values[i]);
-				}
+				cards.add(new Card(ranks[j],suits[i],values[j]));
 			}
-
-		size = cards.length;
+		}
+		size = cards.size();
 		shuffle();
 	}
 
@@ -71,16 +84,27 @@ public class Deck {
 	 * Randomly permute the given collection of cards
 	 * and reset the size to represent the entire deck.
 	 */
-	public void shuffle() {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 4 *** */
-		for(int k = cards.length - 1; k > 0; k--)
-		{	
-			int r = (int)(Math.random()*(k));
-			Card temp = cards[k];
-			cards[k] = cards[r];
-			cards[r] = temp;
-			size = cards.length;
+//	public void shuffle() {
+//		/* *** TO BE IMPLEMENTED IN ACTIVITY 4 *** */
+//		for(int k = cards.length - 1; k > 0; k--)
+//		{	
+//			int r = (int)(Math.random()*(k));
+//			Card temp = cards[k];
+//			cards[k] = cards[r];
+//			cards[r] = temp;
+//			size = cards.length;
+//		}
+//	}
+	public void shuffle()
+	{
+		for(int k = cards.size()-1; k > 0; k--)
+		{
+			int r = (int)(Math.random()*k);
+			Card temp = cards.get(k);
+			cards.set(k, cards.get(r));
+			cards.set(r, temp);
 		}
+		size = cards.size();
 	}
 
 	/**
@@ -88,13 +112,21 @@ public class Deck {
 	 * @return the card just dealt, or null if all the cards have been
 	 *         previously dealt.
 	 */
-	public Card deal() {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
+//	public Card deal() {
+//		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
+//		if(isEmpty())
+//			return null;
+//		size--;
+//		return cards[size];
+//		
+//	}
+	public Card deal()
+	{
 		if(isEmpty())
 			return null;
 		size--;
-		return cards[size];
-		
+		Card c = cards.get(size);
+		return c;
 	}
 
 	/**
@@ -106,8 +138,8 @@ public class Deck {
 		String rtn = "size = " + size + "\nUndealt cards: \n";
 
 		for (int k = size - 1; k >= 0; k--) {
-//			rtn = rtn + cards.get(k);
-			rtn = rtn + cards[k];
+			rtn = rtn + cards.get(k);
+//			rtn = rtn + cards[k];
 			if (k != 0) {
 				rtn = rtn + ", ";
 			}
@@ -118,16 +150,16 @@ public class Deck {
 		}
 
 		rtn = rtn + "\nDealt cards: \n";
-//		for (int k = cards.size() - 1; k >= size; k--)
-		for(int k = cards.length - 1; k >= size; k--)
+		for (int k = cards.size() - 1; k >= size; k--)
+//		for(int k = cards.length - 1; k >= size; k--)
 		{
-//			rtn = rtn + cards.get(k);
-			rtn = rtn + cards[k];
+			rtn = rtn + cards.get(k);
+//			rtn = rtn + cards[k];
 			if (k != size) {
 				rtn = rtn + ", ";
 			}
-//			if ((k - cards.size()) % 2 == 0) {
-			if ((k = cards.length) % 2 ==0){
+			if ((k - cards.size()) % 2 == 0) {
+//			if ((k = cards.length) % 2 ==0){
 				// Insert carriage returns so entire deck is visible on console.
 				rtn = rtn + "\n";
 			}
