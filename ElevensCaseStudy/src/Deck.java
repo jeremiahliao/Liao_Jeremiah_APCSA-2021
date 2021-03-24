@@ -123,7 +123,10 @@ public class Deck {
 	public Card deal()
 	{
 		if(isEmpty())
+		{
+			System.out.println("Deck is empty.");
 			return null;
+		}
 		size--;
 		Card c = cards.get(size);
 		return c;
